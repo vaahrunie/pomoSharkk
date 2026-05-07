@@ -147,6 +147,22 @@
       transition: transform .05s linear;
     }
 
+    x@keyframes swim {
+  0%   { transform: scaleX(1) rotate(0deg); }
+  25%  { transform: scaleX(1) rotate(3deg); }
+  50%  { transform: scaleX(1) rotate(0deg); }
+  75%  { transform: scaleX(1) rotate(-3deg); }
+  100% { transform: scaleX(1) rotate(0deg); }
+}
+
+@keyframes swimFlip {
+  0%   { transform: scaleX(-1) rotate(0deg); }
+  25%  { transform: scaleX(-1) rotate(3deg); }
+  50%  { transform: scaleX(-1) rotate(0deg); }
+  75%  { transform: scaleX(-1) rotate(-3deg); }
+  100% { transform: scaleX(-1) rotate(0deg); }
+}
+
     /* ─── TIMER DISPLAY ─── */
     .timer-face {
       position: relative; z-index: 2;
@@ -472,7 +488,11 @@ function positionShark(){
   sharkOrbit.style.left = (pxX - w/2) + 'px';
   sharkOrbit.style.top  = (pxY - h/2) + 'px';
 
-  sharkOrbit.style.transform = Math.cos(rad) < 0 ? 'scaleX(-1)' : 'scaleX(1)';
+  if (Math.cos(rad) < 0) {
+  sharkOrbit.style.animation = 'swimFlip 1s ease-in-out infinite';
+} else {
+  sharkOrbit.style.animation = 'swim 1s ease-in-out infinite';
+}
 }
 
 // ─── DOTS ─────────────────────────────────────────────
